@@ -1,0 +1,24 @@
+# Base Postgres du bac a sable. Elle n'est pas necessaire pour demarrer :
+# par defaut l'application tourne sur SQLite (voir README).
+#
+# Elle sert au moment ou l'on branche la recherche vectorielle, pour avoir
+# pgvector sous la main sans installer quoi que ce soit sur son poste.
+services:
+  db:
+    image: pgvector/pgvector:pg16
+    environment:
+      POSTGRES_DB: compas
+      POSTGRES_USER: compas
+      POSTGRES_PASSWORD: compas
+    ports:
+      - "55432:5432"
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U compas -d compas"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+volumes:
+  db-data:
