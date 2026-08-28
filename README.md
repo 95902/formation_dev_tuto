@@ -4,9 +4,14 @@
 > Ce n'est pas du travail bâclé : les défauts sont le support des ateliers.
 > Ne recopiez rien d'ici dans un projet réel.
 
-COMPAS est un assistant interne fictif : il répond aux questions des équipes
-en s'appuyant sur la documentation interne (wiki, docs, README de services),
-et cite ses sources sous la forme `chemin:ligne`.
+COMPAS est l'outil interne fictif d'un courtier en assurance. Il fait deux
+choses :
+
+- **gérer le portefeuille** — assurés, contrats, garanties, sinistres, pièces ;
+- **répondre aux questions des gestionnaires** en s'appuyant sur la
+  documentation interne (conditions de garantie, barème de vétusté, procédure
+  sinistre, wiki technique), et en citant ses sources sous la forme
+  `chemin:ligne`.
 
 Il sert de terrain d'entraînement pour la formation « ingénierie assistée par
 l'IA ». On y travaille sur du code qui ressemble à du vrai code — services,
@@ -34,9 +39,28 @@ php artisan test
 Puis :
 
 ```bash
-php artisan compas:ask "quelle est la fenêtre de déploiement ?"
-php artisan serve   # POST /api/ask  {"question": "..."}
+php artisan serve            # puis http://127.0.0.1:8000
+php artisan compas:ask "quel est le délai de déclaration d'un sinistre ?"
 ```
+
+Le portefeuille chargé par `--seed` est **reproductible** : graine fixe, dates
+ancrées sur le 31/08/2026 et non sur « aujourd'hui ». Les chiffres cités dans
+les tickets tombent donc juste chez tout le monde, aujourd'hui comme dans six
+mois. Après un `migrate:fresh --seed`, vous avez exactement la même base que
+vos collègues.
+
+### Le portefeuille
+
+| | |
+|---|---|
+| 40 assurés | 74 contrats · 4 produits (auto, moto, habitation, RC pro) |
+| 239 garanties | plafonds et franchises par garantie |
+| 130 sinistres | 6 natures, 5 statuts, 309 pièces |
+| 8 documents | conditions de garantie, barème, procédure, wiki technique |
+
+Le bandeau noir en bas à droite affiche le nombre de requêtes SQL déclenchées
+par la page en cours. Il n'est là qu'en mode debug, et il sert : une page qui
+en déclenche cent doit se voir.
 
 ### Aucune clé n'est nécessaire
 
@@ -84,6 +108,11 @@ lisez cette section que si vous animez la séance** — elle donne les réponses
 | `HttpLlmClient::API_KEY` | clé en dur dans le code (valeur factice, inoffensive) |
 | `StatsController` | enfreint les conventions API internes : `camelCase`, clé primaire exposée, pagination par offset |
 | `app/Services/Answering/Formatters/` | cinq classes quasi identiques, dont une méthode morte |
+| `SinistreController::index()` | aucun `with()` : la vue résout `contrat.assure` et `pieces` ligne par ligne (N+1) |
+| `Sinistre::indemniteCents()` | `(int)` tronque au lieu d'arrondir — un centime perdu sur un dossier sur deux |
+| `SinistreController::index()` | la borne haute compare une colonne `datetime` à une date, donc à minuit |
+| `DashboardController` | compte `statut = 'cloture'`, alors que la valeur en base est `clos` |
+| `SinistreController::update()` | `$request->all()` au lieu de `validated()` — affectation de masse |
 
 </details>
 
@@ -94,3 +123,6 @@ lisez cette section que si vous animez la séance** — elle donne les réponses
 Pas de déroulé d'atelier, pas d'objectifs pédagogiques, pas de corrigés. Tout
 cela vit dans le pack de formation, à côté. Ici il n'y a que le produit et son
 backlog — comme dans un vrai projet.
+
+Pas d'authentification non plus : toutes les pages sont ouvertes. C'est un choix
+de bac à sable, pas un modèle. Ne le reprenez nulle part.

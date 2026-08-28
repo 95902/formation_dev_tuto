@@ -1,0 +1,136 @@
+/* COMPAS — feuille de style unique, sans build. Servie telle quelle. */
+
+:root{
+  --fond:#f6f7f9; --carte:#fff; --trait:#e2e5ea; --trait-fort:#cbd1da;
+  --texte:#1b2027; --doux:#5c6673; --pale:#8b95a3;
+  --acc:#1f5f8b; --acc-clair:#eaf2f8;
+  --ok:#1a7f5a; --ok-clair:#e6f4ee;
+  --alerte:#a8630d; --alerte-clair:#fdf1e0;
+  --stop:#a32c2c; --stop-clair:#fbeaea;
+  --mono:"SFMono-Regular",Consolas,"Liberation Mono",monospace;
+  --sans:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",sans-serif;
+}
+
+*{box-sizing:border-box}
+body{margin:0;background:var(--fond);color:var(--texte);font:15px/1.55 var(--sans)}
+a{color:var(--acc);text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* ---- ossature ---- */
+.appli{display:grid;grid-template-columns:220px 1fr;min-height:100vh}
+.rail{background:#141a21;color:#c3ccd7;padding:20px 0;position:sticky;top:0;height:100vh;overflow:auto}
+.rail .marque{font-weight:700;font-size:19px;color:#fff;padding:0 20px 4px;letter-spacing:.5px}
+.rail .sous{padding:0 20px 20px;font-size:11.5px;color:#6b7684;text-transform:uppercase;letter-spacing:.6px}
+.rail a{display:block;padding:9px 20px;color:#c3ccd7;font-size:14px;border-left:3px solid transparent}
+.rail a:hover{background:#1c242e;color:#fff;text-decoration:none}
+.rail a.on{background:#1c242e;color:#fff;border-left-color:var(--acc)}
+.rail .groupe{padding:18px 20px 6px;font-size:11px;color:#5e6875;text-transform:uppercase;letter-spacing:.7px}
+
+.page{padding:26px 30px 70px;max-width:1180px}
+.fil{font-size:13px;color:var(--pale);margin-bottom:6px}
+.fil a{color:var(--doux)}
+h1{font-size:24px;margin:0 0 4px;font-weight:650}
+h2{font-size:17px;margin:26px 0 10px;font-weight:620}
+.chapeau{color:var(--doux);margin:0 0 20px;font-size:14px}
+.entete{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap}
+
+/* ---- cartes ---- */
+.carte{background:var(--carte);border:1px solid var(--trait);border-radius:7px;padding:16px 18px;margin-bottom:16px}
+.carte h3{margin:0 0 12px;font-size:14px;font-weight:620;color:var(--doux);text-transform:uppercase;letter-spacing:.5px}
+.tuiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(158px,1fr));gap:12px;margin-bottom:22px}
+.tuile{background:var(--carte);border:1px solid var(--trait);border-radius:7px;padding:14px 16px}
+.tuile .n{font-size:27px;font-weight:640;line-height:1.15;font-variant-numeric:tabular-nums}
+.tuile .l{font-size:12.5px;color:var(--doux);margin-top:2px}
+
+/* ---- tableaux ---- */
+table{width:100%;border-collapse:collapse;font-size:14px}
+th{text-align:left;font-weight:600;font-size:12px;color:var(--doux);text-transform:uppercase;
+   letter-spacing:.4px;padding:8px 10px;border-bottom:1px solid var(--trait-fort);white-space:nowrap}
+td{padding:9px 10px;border-bottom:1px solid var(--trait);vertical-align:top}
+tbody tr:hover{background:#fafbfc}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.ref{font-family:var(--mono);font-size:12.5px}
+.vide{padding:26px 10px;text-align:center;color:var(--pale);font-size:14px}
+
+/* ---- pastilles ---- */
+.p{display:inline-block;padding:2px 8px;border-radius:11px;font-size:11.5px;font-weight:600;white-space:nowrap}
+.p-declare{background:var(--acc-clair);color:var(--acc)}
+.p-en_cours{background:var(--alerte-clair);color:var(--alerte)}
+.p-expertise{background:#efeaf7;color:#5b3d8f}
+.p-clos{background:var(--ok-clair);color:var(--ok)}
+.p-refuse{background:var(--stop-clair);color:var(--stop)}
+.p-actif{background:var(--ok-clair);color:var(--ok)}
+.p-suspendu{background:var(--alerte-clair);color:var(--alerte)}
+.p-resilie{background:#eceef1;color:var(--doux)}
+.p-neutre{background:#eceef1;color:var(--doux)}
+
+/* ---- formulaires ---- */
+.grille{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px}
+label{display:block;font-size:12.5px;font-weight:600;color:var(--doux);margin-bottom:4px}
+input,select,textarea{width:100%;padding:8px 10px;border:1px solid var(--trait-fort);border-radius:5px;
+  font:14px var(--sans);background:#fff;color:var(--texte)}
+input:focus,select:focus,textarea:focus{outline:2px solid var(--acc-clair);border-color:var(--acc)}
+textarea{min-height:92px;resize:vertical}
+.champ{margin-bottom:14px}
+.aide{font-size:12px;color:var(--pale);margin-top:3px}
+.err{color:var(--stop);font-size:12.5px;margin-top:3px}
+.barre-actions{display:flex;gap:10px;align-items:center;margin-top:18px;padding-top:16px;border-top:1px solid var(--trait)}
+
+/* ---- boutons ---- */
+.b{display:inline-block;padding:8px 15px;border-radius:5px;border:1px solid var(--trait-fort);
+   background:#fff;color:var(--texte);font:600 13.5px var(--sans);cursor:pointer}
+.b:hover{background:#f2f4f7;text-decoration:none}
+.b-p{background:var(--acc);border-color:var(--acc);color:#fff}
+.b-p:hover{background:#194e73}
+.b-d{border-color:#e3bcbc;color:var(--stop);background:#fff}
+.b-d:hover{background:var(--stop-clair)}
+.b-s{padding:5px 10px;font-size:12.5px}
+
+/* ---- messages ---- */
+.msg{padding:10px 14px;border-radius:6px;margin-bottom:16px;font-size:14px}
+.msg-ok{background:var(--ok-clair);color:var(--ok);border:1px solid #b9e0cf}
+.msg-err{background:var(--stop-clair);color:var(--stop);border:1px solid #eec4c4}
+
+/* ---- filtres ---- */
+.filtres{display:flex;gap:10px;align-items:flex-end;flex-wrap:wrap;margin-bottom:16px;
+  background:var(--carte);border:1px solid var(--trait);border-radius:7px;padding:13px 15px}
+.filtres .champ{margin:0;min-width:132px}
+.filtres .champ.large{flex:1;min-width:210px}
+
+/* ---- pagination ---- */
+.pagi{display:flex;gap:5px;align-items:center;margin-top:16px;font-size:13.5px;flex-wrap:wrap}
+.pagi a,.pagi span{padding:5px 10px;border:1px solid var(--trait-fort);border-radius:5px;background:#fff}
+.pagi .courant{background:var(--acc);border-color:var(--acc);color:#fff;font-weight:600}
+.pagi .mort{color:var(--pale);background:#f2f4f7}
+.pagi .compte{border:0;background:none;color:var(--doux);padding-left:10px}
+
+/* ---- definitions ---- */
+.defs{display:grid;grid-template-columns:auto 1fr;gap:7px 18px;font-size:14px;align-items:baseline}
+.defs dt{color:var(--doux);font-size:12.5px}
+.defs dd{margin:0}
+
+/* ---- console COMPAS ---- */
+.reponse{background:var(--carte);border:1px solid var(--trait);border-left:3px solid var(--acc);
+  border-radius:7px;padding:16px 18px;margin-bottom:16px}
+.reponse p{margin:0 0 10px;line-height:1.6}
+.sources{list-style:none;padding:0;margin:0}
+.sources li{padding:6px 0;border-top:1px solid var(--trait);font-size:13.5px}
+.sources .lieu{font-family:var(--mono);font-size:12.5px;color:var(--acc)}
+.sources .extrait{color:var(--doux);display:block;margin-top:2px}
+.pistes{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.pistes a{font-size:12.5px;background:var(--acc-clair);color:var(--acc);padding:5px 11px;border-radius:13px}
+.pistes a:hover{text-decoration:none;background:#dbe9f3}
+
+/* ---- bandeau de bas de page ---- */
+.sonde{position:fixed;bottom:0;right:0;background:#141a21;color:#8b95a3;font:12px var(--mono);
+  padding:5px 13px;border-top-left-radius:6px;z-index:20}
+.sonde b{color:#e0e5ea;font-weight:600}
+.sonde .chaud{color:#e8a33d}
+
+@media (max-width:820px){
+  .appli{grid-template-columns:1fr}
+  .rail{position:static;height:auto;display:flex;flex-wrap:wrap;gap:2px;padding:12px}
+  .rail .marque,.rail .sous,.rail .groupe{width:100%;padding:4px 8px}
+  .rail a{border-left:0;border-radius:5px;padding:7px 11px}
+  .page{padding:18px 15px 70px}
+}
