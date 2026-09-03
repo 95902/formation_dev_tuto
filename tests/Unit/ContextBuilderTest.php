@@ -5,6 +5,7 @@ namespace Tests\Unit;
 use App\Models\Document;
 use App\Services\Retrieval\ContextBuilder;
 use App\Services\Retrieval\ScoredDocument;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 class ContextBuilderTest extends TestCase
@@ -43,5 +44,35 @@ class ContextBuilderTest extends TestCase
         $context = $this->builder->build($results, budget: 500);
 
         $this->assertLessThanOrEqual(600, strlen($context));
+    }
+
+    /**
+     * Decompte de reference independant de la langue : les fournisseurs
+     * facturent grossierement 4 caracteres par token, y compris sur du
+     * francais accentue. Sert de garde-fou pour l'estimation par mots.
+     */
+    public static function corpusDocuments(): array
+    {
+        $paths = [
+            'wiki-gestion-sinistre.md',
+            'doc-bareme-vetuste.md',
+            'doc-garanties-habitation.md',
+            'wiki-astreinte.md',
+            'README-facturation.md',
+        ];
+
+        return array_combine($paths, array_map(fn (string $p) => [$p], $paths));
+    }
+
+    #[DataProvider('corpusDocuments')]
+    public function test_it_estimates_tokens_within_25_percent_of_reference_on_the_corpus(string $filename): void
+    {
+        $path = dirname(__DIR__, 2).'/database/seeds/documents/'.$filename;
+        $text = file_get_contents($path);
+
+        $reference = mb_strlen($text, 'UTF-8') / 4;
+        $estimate = $this->builder->estimateTokens($text);
+
+        $this->assertEqualsWithDelta($reference, $estimate, $reference * 0.25, "Estimation hors tolerance pour {$filename}");
     }
 }

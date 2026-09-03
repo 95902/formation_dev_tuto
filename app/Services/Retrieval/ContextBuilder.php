@@ -51,10 +51,21 @@ class ContextBuilder
 
     /**
      * Estimation du cout en tokens du contexte assemble.
-     * Repere : 1 token vaut environ 3/4 de mot.
+     * Repere : 1 token vaut environ 3/4 de mot, donc un mot vaut environ
+     * 1 / 0.75 token. Les symboles (ponctuation, devises, "#"...) sont
+     * comptes a part : le fournisseur les facture, mais ce ne sont pas
+     * des mots.
+     *
+     * str_word_count() ne reconnait que les lettres ASCII : un mot
+     * accentue ("delai") est tronque au premier caractere UTF-8
+     * multi-octets, et les nombres/symboles sont ignores. Sur du francais,
+     * cela sous-estimait le cout reel du simple au triple.
      */
     public function estimateTokens(string $text): int
     {
-        return (int) round(str_word_count($text) * 0.75);
+        preg_match_all('/[\p{L}\p{N}]+/u', $text, $words);
+        preg_match_all('/[^\s\p{L}\p{N}]/u', $text, $symbols);
+
+        return (int) round(count($words[0]) / 0.75) + count($symbols[0]);
     }
 }
