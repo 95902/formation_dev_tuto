@@ -2,40 +2,44 @@
 
 namespace App\Services\Answering\Formatters;
 
-use App\Services\Answering\Answer;
 use App\Services\Answering\Citation;
 
-class HtmlFormatter
+class HtmlFormatter extends AbstractTextFormatter
 {
-    public function format(Answer $answer): string
+    protected function renderQuestion(string $question): string
     {
-        $out = '<p><strong>Question :</strong> '.e($answer->question)."</p>\n";
-        $out .= '<p>'.e($answer->text)."</p>\n";
-
-        if ($answer->citations === []) {
-            $out .= "<p>Aucune source.</p>\n";
-        } else {
-            $count = count($answer->citations);
-            $out .= $count === 1 ? "<p><strong>1 source :</strong></p>\n" : "<p><strong>{$count} sources :</strong></p>\n";
-            $out .= "<ul>\n";
-
-            foreach ($answer->citations as $citation) {
-                $out .= '<li>'.$this->line($citation)."</li>\n";
-            }
-
-            $out .= "</ul>\n";
-        }
-
-        return $out.'<p><em>[contexte ~'.$answer->contextTokens." tokens]</em></p>\n";
+        return '<p><strong>Question :</strong> '.e($question)."</p>\n";
     }
 
-    private function line(Citation $citation): string
+    protected function renderBody(string $text): string
     {
-        return '<code>'.e($citation->label()).'</code> '.e($this->shorten($citation->excerpt));
+        return '<p>'.e($text)."</p>\n";
     }
 
-    private function shorten(string $text): string
+    protected function renderNoSources(): string
     {
-        return mb_strlen($text) > 60 ? mb_substr($text, 0, 57).'...' : $text;
+        return "<p>Aucune source.</p>\n";
+    }
+
+    protected function renderSourcesHeader(int $count): string
+    {
+        $header = $count === 1 ? "<p><strong>1 source :</strong></p>\n" : "<p><strong>{$count} sources :</strong></p>\n";
+
+        return $header."<ul>\n";
+    }
+
+    protected function renderCitationLine(Citation $citation): string
+    {
+        return '<li><code>'.e($citation->label()).'</code> '.e($this->shorten($citation->excerpt))."</li>\n";
+    }
+
+    protected function renderCitationsClose(): string
+    {
+        return "</ul>\n";
+    }
+
+    protected function renderFooter(int $contextTokens): string
+    {
+        return '<p><em>[contexte ~'.$contextTokens." tokens]</em></p>\n";
     }
 }

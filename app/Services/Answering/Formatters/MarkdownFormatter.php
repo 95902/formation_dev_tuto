@@ -2,37 +2,37 @@
 
 namespace App\Services\Answering\Formatters;
 
-use App\Services\Answering\Answer;
 use App\Services\Answering\Citation;
 
-class MarkdownFormatter
+class MarkdownFormatter extends AbstractTextFormatter
 {
-    public function format(Answer $answer): string
+    protected function renderQuestion(string $question): string
     {
-        $out = "**Question :** {$answer->question}\n\n";
-        $out .= $answer->text."\n\n";
-
-        if ($answer->citations === []) {
-            $out .= "Aucune source.\n";
-        } else {
-            $count = count($answer->citations);
-            $out .= $count === 1 ? "**1 source :**\n" : "**{$count} sources :**\n";
-
-            foreach ($answer->citations as $citation) {
-                $out .= '- '.$this->line($citation)."\n";
-            }
-        }
-
-        return $out."\n_[contexte ~{$answer->contextTokens} tokens]_";
+        return "**Question :** {$question}\n\n";
     }
 
-    private function line(Citation $citation): string
+    protected function renderBody(string $text): string
     {
-        return '`'.$citation->label().'` — '.$this->shorten($citation->excerpt);
+        return $text."\n\n";
     }
 
-    private function shorten(string $text): string
+    protected function renderNoSources(): string
     {
-        return mb_strlen($text) > 60 ? mb_substr($text, 0, 57).'...' : $text;
+        return "Aucune source.\n";
+    }
+
+    protected function renderSourcesHeader(int $count): string
+    {
+        return $count === 1 ? "**1 source :**\n" : "**{$count} sources :**\n";
+    }
+
+    protected function renderCitationLine(Citation $citation): string
+    {
+        return '- `'.$citation->label().'` — '.$this->shorten($citation->excerpt)."\n";
+    }
+
+    protected function renderFooter(int $contextTokens): string
+    {
+        return "\n_[contexte ~{$contextTokens} tokens]_";
     }
 }
