@@ -1,0 +1,15 @@
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Write|Edit|NotebookEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "jq -r '.tool_input.file_path // .tool_input.notebook_path // empty' | { read -r f; if [ -z \"$f\" ]; then exit 0; fi; case \"$f\" in */migrations/*|migrations/*) printf '%s' '{\"hookSpecificOutput\":{\"hookEventName\":\"PreToolUse\",\"permissionDecision\":\"deny\",\"permissionDecisionReason\":\"Écriture interdite dans le dossier migrations/ (protégé par hook).\"}}' ;; esac; }"
+          }
+        ]
+      }
+    ]
+  }
+}
