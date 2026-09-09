@@ -1,4 +1,9 @@
 {
+  "permissions": {
+    "deny": [
+      "Bash(rm *)"
+    ]
+  },
   "hooks": {
     "PreToolUse": [
       {
@@ -25,4 +30,5 @@
       }
     ]
   }
+  
 }
