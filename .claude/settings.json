@@ -11,6 +11,18 @@
           }
         ]
       }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "statusMessage": "Lint ESLint du fichier modifié",
+            "command": "jq -r '.tool_response.filePath // .tool_input.file_path // empty' | { read -r f; if [ -z \"$f\" ]; then exit 0; fi; case \"$f\" in *.js|*.jsx|*.ts|*.tsx|*.mjs|*.cjs) : ;; *) exit 0;; esac; ESLINT=\"\"; if [ -x \"./node_modules/.bin/eslint\" ]; then ESLINT=\"./node_modules/.bin/eslint\"; elif command -v eslint >/dev/null 2>&1; then ESLINT=\"eslint\"; else exit 0; fi; OUT=$(\"$ESLINT\" \"$f\" --no-color 2>&1); if [ -n \"$OUT\" ]; then printf '%s' \"{\\\"decision\\\":\\\"block\\\",\\\"reason\\\":$(printf '%s' \"$OUT\" | jq -Rs .)}\"; fi; }"
+          }
+        ]
+      }
     ]
   }
 }
