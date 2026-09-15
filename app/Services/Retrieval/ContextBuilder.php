@@ -23,7 +23,7 @@ class ContextBuilder
 
         foreach ($results as $result) {
             $header = "--- {$result->document->path} ---\n";
-            $remaining = $budget - $used - strlen($header);
+            $remaining = $budget - $used - mb_strlen($header, 'UTF-8');
 
             if ($remaining <= 0) {
                 break;
@@ -31,7 +31,7 @@ class ContextBuilder
 
             $body = $this->truncate($result->document->content, $remaining);
             $blocks[] = $header.$body;
-            $used += strlen($header) + strlen($body);
+            $used += mb_strlen($header, 'UTF-8') + mb_strlen($body, 'UTF-8');
         }
 
         return implode("\n\n", $blocks);
@@ -42,11 +42,11 @@ class ContextBuilder
      */
     public function truncate(string $text, int $maxChars): string
     {
-        if (strlen($text) <= $maxChars) {
+        if (mb_strlen($text, 'UTF-8') <= $maxChars) {
             return $text;
         }
 
-        return substr($text, 0, $maxChars).'...';
+        return mb_substr($text, 0, $maxChars, 'UTF-8').'...';
     }
 
     /**

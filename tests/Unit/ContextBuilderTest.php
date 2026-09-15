@@ -44,4 +44,21 @@ class ContextBuilderTest extends TestCase
 
         $this->assertLessThanOrEqual(600, strlen($context));
     }
+
+    public function test_it_never_cuts_a_multibyte_character_in_half(): void
+    {
+        // "cafés" (5 caracteres, 6 octets : le "é" occupe 2 octets en UTF-8). Un
+        // budget de 4 caracteres coupe une chaine "naive" par octets pile au milieu
+        // de ce "é" (byte 3 sur 4), reproduisant le symptome du ticket.
+        $text = 'cafés';
+
+        $result = $this->builder->truncate($text, 4);
+
+        $this->assertTrue(
+            mb_check_encoding($result, 'UTF-8'),
+            "Le texte tronque n'est pas une chaine UTF-8 valide : ".bin2hex($result)
+        );
+        $this->assertSame('café...', $result);
+        $this->assertStringNotContainsString("\u{FFFD}", $result);
+    }
 }
