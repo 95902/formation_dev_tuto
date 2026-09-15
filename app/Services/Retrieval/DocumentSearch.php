@@ -60,6 +60,8 @@ class DocumentSearch
     {
         $parts = preg_split('/[^\p{L}\p{N}]+/u', $query, -1, PREG_SPLIT_NO_EMPTY);
 
+        $parts = array_map(fn (string $p) => mb_strtolower($p), $parts);
+
         return array_values(array_filter($parts, fn (string $p) => mb_strlen($p) > 2));
     }
 
@@ -72,6 +74,14 @@ class DocumentSearch
      */
     private function dedupe(Collection $scored): Collection
     {
-        return $scored->unique(fn (ScoredDocument $s) => $s->document->title)->values();
+        $seen = [];
+        return $scored->filter(function (ScoredDocument $s) use (&$seen) {
+            $path = $s->document->path;
+            if (isset($seen[$path])) {
+                return false;
+            }
+            $seen[$path] = true;
+            return true;
+        })->values();
     }
 }
