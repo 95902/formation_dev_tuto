@@ -1,0 +1,134 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-09-17T00:00:00Z",
+  "title": "Design System: COMPAS",
+  "extensions": {
+    "colorMeta": {
+      "acc": { "role": "primary", "displayName": "Bleu Acier Sourd", "canonical": "#1f5f8b", "tonalRamp": ["#0d2735", "#123a4f", "#194e73", "#1f5f8b", "#2f77a6", "#5a96bd", "#93bcd6", "#dceaf3"] },
+      "acc-clair": { "role": "primary-container", "displayName": "Bleu Acier Voilé", "canonical": "#eaf2f8" },
+      "ok": { "role": "success", "displayName": "Vert Réglé", "canonical": "#1a7f5a", "tonalRamp": ["#0a2e21", "#0f4632", "#146045", "#1a7f5a", "#22a374", "#5fc39a", "#9fdcc0", "#e0f4ea"] },
+      "ok-clair": { "role": "success-container", "displayName": "Vert Réglé Voilé", "canonical": "#e6f4ee" },
+      "alerte": { "role": "warning", "displayName": "Ambre Vigilance", "canonical": "#a8630d", "tonalRamp": ["#3d2404", "#5c3606", "#805008", "#a8630d", "#c97e1e", "#e0a24f", "#eec284", "#faedd7"] },
+      "alerte-clair": { "role": "warning-container", "displayName": "Ambre Vigilance Voilé", "canonical": "#fdf1e0" },
+      "stop": { "role": "danger", "displayName": "Rouge Refus", "canonical": "#a32c2c", "tonalRamp": ["#3d1010", "#5c1818", "#822121", "#a32c2c", "#c44444", "#d97878", "#e9aeae", "#f8dede"] },
+      "stop-clair": { "role": "danger-container", "displayName": "Rouge Refus Voilé", "canonical": "#fbeaea" },
+      "expertise": { "role": "special-status", "displayName": "Violet Expertise", "canonical": "#5b3d8f", "tonalRamp": ["#1f1533", "#2e204c", "#432e6d", "#5b3d8f", "#7a5cb0", "#a48ccd", "#cbbde3", "#ede8f6"] },
+      "expertise-clair": { "role": "special-status-container", "displayName": "Violet Expertise Voilé", "canonical": "#efeaf7" },
+      "fond": { "role": "background", "displayName": "Fond Page", "canonical": "#f6f7f9" },
+      "carte": { "role": "surface", "displayName": "Carte", "canonical": "#ffffff" },
+      "trait": { "role": "border", "displayName": "Trait", "canonical": "#e2e5ea" },
+      "trait-fort": { "role": "border-strong", "displayName": "Trait Fort", "canonical": "#cbd1da" },
+      "texte": { "role": "on-surface", "displayName": "Texte", "canonical": "#1b2027" },
+      "doux": { "role": "on-surface-variant", "displayName": "Doux", "canonical": "#5c6673" },
+      "pale": { "role": "on-surface-faint", "displayName": "Pâle", "canonical": "#8b95a3" },
+      "rail-fond": { "role": "inverse-surface", "displayName": "Rail Fond", "canonical": "#141a21" },
+      "rail-texte": { "role": "inverse-on-surface", "displayName": "Rail Texte", "canonical": "#c3ccd7" },
+      "rail-survol": { "role": "inverse-surface-hover", "displayName": "Rail Survol", "canonical": "#1c242e" }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "Titres de page (h1)." },
+      "headline": { "displayName": "Headline", "purpose": "Titres de section (h2)." },
+      "body": { "displayName": "Body", "purpose": "Texte courant, cellules de tableau." },
+      "label": { "displayName": "Label", "purpose": "En-têtes de tableau, titres de carte, groupes de navigation, en majuscules." },
+      "mono": { "displayName": "Mono Traçabilité", "purpose": "Références de pièces, citations chemin:ligne de l'assistant, bandeau de requêtes SQL." }
+    },
+    "shadows": [],
+    "motion": [],
+    "breakpoints": [
+      { "name": "mobile", "value": "820px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Action principale (enregistrer, créer).",
+      "html": "<button class=\"ds-btn-primary\">Enregistrer</button>",
+      "css": ".ds-btn-primary { background: #1f5f8b; color: #fff; padding: 8px 15px; border: 1px solid #1f5f8b; border-radius: 5px; font: 600 13.5px system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif; cursor: pointer; } .ds-btn-primary:hover { background: #194e73; } .ds-btn-primary:focus-visible { outline: 2px solid #eaf2f8; outline-offset: 1px; }"
+    },
+    {
+      "name": "Default Button",
+      "kind": "button",
+      "refersTo": "button-default",
+      "description": "Action secondaire (annuler, retour).",
+      "html": "<button class=\"ds-btn-default\">Annuler</button>",
+      "css": ".ds-btn-default { background: #fff; color: #1b2027; padding: 8px 15px; border: 1px solid #cbd1da; border-radius: 5px; font: 600 13.5px system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif; cursor: pointer; } .ds-btn-default:hover { background: #f2f4f7; }"
+    },
+    {
+      "name": "Danger Button",
+      "kind": "button",
+      "refersTo": "button-danger",
+      "description": "Action destructive (supprimer, refuser).",
+      "html": "<button class=\"ds-btn-danger\">Supprimer</button>",
+      "css": ".ds-btn-danger { background: #fff; color: #a32c2c; padding: 8px 15px; border: 1px solid #e3bcbc; border-radius: 5px; font: 600 13.5px system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif; cursor: pointer; } .ds-btn-danger:hover { background: #fbeaea; }"
+    },
+    {
+      "name": "Text Input",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "Champ de formulaire standard.",
+      "html": "<input class=\"ds-input\" type=\"text\" placeholder=\"Numéro de contrat\">",
+      "css": ".ds-input { width: 100%; padding: 8px 10px; border: 1px solid #cbd1da; border-radius: 5px; font: 14px system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif; background: #fff; color: #1b2027; } .ds-input:focus { outline: 2px solid #eaf2f8; border-color: #1f5f8b; }"
+    },
+    {
+      "name": "Status Pill",
+      "kind": "chip",
+      "refersTo": "pastille",
+      "description": "Badge de statut (sinistre/contrat), coloré selon l'état.",
+      "html": "<span class=\"ds-pastille ds-pastille--declare\">Déclaré</span>",
+      "css": ".ds-pastille { display: inline-block; padding: 2px 8px; border-radius: 11px; font-size: 11.5px; font-weight: 600; white-space: nowrap; } .ds-pastille--declare { background: #eaf2f8; color: #1f5f8b; } .ds-pastille--en_cours { background: #fdf1e0; color: #a8630d; } .ds-pastille--expertise { background: #efeaf7; color: #5b3d8f; } .ds-pastille--clos { background: #e6f4ee; color: #1a7f5a; } .ds-pastille--refuse { background: #fbeaea; color: #a32c2c; }"
+    },
+    {
+      "name": "Card",
+      "kind": "card",
+      "refersTo": "card",
+      "description": "Conteneur standard sans ombre, bordure 1px.",
+      "html": "<div class=\"ds-carte\"><h3>Contrat</h3><p>Contenu de la carte.</p></div>",
+      "css": ".ds-carte { background: #fff; border: 1px solid #e2e5ea; border-radius: 7px; padding: 16px 18px; margin-bottom: 16px; } .ds-carte h3 { margin: 0 0 12px; font-size: 14px; font-weight: 620; color: #5c6673; text-transform: uppercase; letter-spacing: 0.5px; }"
+    },
+    {
+      "name": "Sidebar Navigation Link",
+      "kind": "nav",
+      "refersTo": "rail-link",
+      "description": "Lien de la sidebar sombre, avec état actif marqué par une bordure gauche accent.",
+      "html": "<a class=\"ds-rail-link ds-rail-link--on\" href=\"#\">Tableau de bord</a>",
+      "css": ".ds-rail-link { display: block; padding: 9px 20px; color: #c3ccd7; font-size: 14px; border-left: 3px solid transparent; background: #141a21; } .ds-rail-link:hover { background: #1c242e; color: #fff; text-decoration: none; } .ds-rail-link--on { background: #1c242e; color: #fff; border-left-color: #1f5f8b; }"
+    },
+    {
+      "name": "Assistant Answer Card",
+      "kind": "custom",
+      "refersTo": "reponse",
+      "description": "Carte signature de la console COMPAS : réponse de l'assistant avec sources chemin:ligne citées.",
+      "html": "<div class=\"ds-reponse\"><p>Le délai de déclaration d'un sinistre est de 5 jours ouvrés.</p><ul class=\"ds-sources\"><li><span class=\"ds-lieu\">conditions-generales.md:42</span><span class=\"ds-extrait\">« Le sinistre doit être déclaré dans un délai de 5 jours ouvrés... »</span></li></ul></div>",
+      "css": ".ds-reponse { background: #fff; border: 1px solid #e2e5ea; border-left: 3px solid #1f5f8b; border-radius: 7px; padding: 16px 18px; margin-bottom: 16px; } .ds-reponse p { margin: 0 0 10px; line-height: 1.6; } .ds-sources { list-style: none; padding: 0; margin: 0; } .ds-sources li { padding: 6px 0; border-top: 1px solid #e2e5ea; font-size: 13.5px; } .ds-lieu { font-family: SFMono-Regular, Consolas, 'Liberation Mono', monospace; font-size: 12.5px; color: #1f5f8b; display: block; } .ds-extrait { color: #5c6673; display: block; margin-top: 2px; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "Le Poste de Contrôle",
+    "overview": "COMPAS s'habille comme un poste de contrôle opérationnel, pas comme un produit à vendre : une sidebar sombre fait office de panneau de commande fixe, le contenu se lit en cartes plates et tableaux denses, et la couleur n'intervient que pour signaler un état ou une action — jamais pour décorer. Rien n'est ombré, rien ne flotte ; la surface entière est au même niveau, et seule une bordure fine ou un fond légèrement teinté distingue une carte du fond de page. La police mono n'apparaît que là où la traçabilité compte (références de pièces, citations chemin:ligne de l'assistant, bandeau de requêtes SQL), renforçant l'idée que chaque donnée affichée a une origine vérifiable.\n\nL'anti-référence est explicite : ni gradient, ni glassmorphism, ni palette « SaaS marketing » saturée. COMPAS est un outil de travail interne pour des gestionnaires, pas une page de vente.",
+    "keyCharacteristics": [
+      "Sidebar sombre fixe (panneau de commande) contre un contenu clair et plat.",
+      "Aucune ombre portée nulle part ; la profondeur vient de la couleur de fond et des bordures 1px.",
+      "Couleur réservée au statut, à l'action et à la navigation active — jamais décorative.",
+      "Police mono dédiée à tout ce qui doit rester traçable et vérifiable.",
+      "Densité assumée (tableaux serrés, tuiles chiffrées) plutôt qu'espacement généreux."
+    ],
+    "rules": [
+      { "name": "La Règle de la Couleur Utile", "body": "Une couleur n'apparaît que pour porter un sens (statut, action, sélection) ; en dehors du bleu acier et des trois teintes sémantiques, tout reste gris-neutre.", "section": "colors" },
+      { "name": "La Règle du Mono Justifié", "body": "La police mono ne sert jamais d'esthétique ; elle marque exclusivement une donnée vérifiable (chemin de fichier, ligne, référence de pièce).", "section": "typography" },
+      { "name": "La Règle du Plat par Défaut", "body": "Aucune ombre portée n'existe nulle part dans la feuille de style. La profondeur est entièrement conventionnelle : fond + bordure 1px, jamais un flou ou un décalage.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do réserver la couleur au statut, à l'action ou à la navigation active.",
+      "Do garder la profondeur strictement conventionnelle : fond + bordure 1px, jamais d'ombre.",
+      "Do utiliser la police mono uniquement pour une donnée traçable/vérifiable.",
+      "Do garder les coins entre 5px (contrôles) et 7px (cartes), et réserver le plein arrondi en pilule aux badges/pills."
+    ],
+    "donts": [
+      "Don't introduire de gradient, glassmorphism, ou palette « SaaS marketing » saturée.",
+      "Don't ajouter d'ombre portée à un composant existant pour lui donner du « relief ».",
+      "Don't inventer une nouvelle couleur sémantique en dehors de bleu acier / vert / ambre / rouge / violet (ce dernier strictement réservé au statut « expertise »)."
+    ]
+  }
+}

@@ -13,7 +13,7 @@
         · <a href="{{ route('assures.show', $sinistre->contrat->assure) }}">{{ $sinistre->contrat->assure->nomComplet() }}</a>
       </p>
     </div>
-    <div style="display:flex;gap:8px">
+    <div class="actions">
       <a class="b" href="{{ route('compas', ['question' => 'Quelle franchise s\'applique à un '.mb_strtolower($sinistre->natureLibelle()).' ?', 'sinistre' => $sinistre->id]) }}">Demander à COMPAS</a>
       <a class="b b-p" href="{{ route('sinistres.edit', $sinistre) }}">Modifier</a>
     </div>
@@ -80,7 +80,7 @@
       </tbody>
     </table>
 
-    <form method="post" action="{{ route('pieces.store', $sinistre) }}" style="margin-top:16px">
+    <form method="post" action="{{ route('pieces.store', $sinistre) }}" class="groupe-ajout">
       @csrf
       <div class="grille">
         <div class="champ">

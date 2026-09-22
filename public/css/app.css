@@ -40,7 +40,11 @@ h2{font-size:17px;margin:26px 0 10px;font-weight:620}
 .tuiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(158px,1fr));gap:12px;margin-bottom:22px}
 .tuile{background:var(--carte);border:1px solid var(--trait);border-radius:7px;padding:14px 16px}
 .tuile .n{font-size:27px;font-weight:640;line-height:1.15;font-variant-numeric:tabular-nums}
+.tuile .n.n-ok{color:var(--ok)}
+.tuile .n.n-stop{color:var(--stop)}
 .tuile .l{font-size:12.5px;color:var(--doux);margin-top:2px}
+.tuile .t{font-size:12px;color:var(--pale);margin-top:6px}
+.reference-rapide{margin:0}
 
 /* ---- tableaux ---- */
 table{width:100%;border-collapse:collapse;font-size:14px}
@@ -66,6 +70,7 @@ td.num,th.num{text-align:right;font-variant-numeric:tabular-nums;white-space:now
 
 /* ---- formulaires ---- */
 .grille{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px}
+.champ-pleine{grid-column:1/-1}
 label{display:block;font-size:12.5px;font-weight:600;color:var(--doux);margin-bottom:4px}
 input,select,textarea{width:100%;padding:8px 10px;border:1px solid var(--trait-fort);border-radius:5px;
   font:14px var(--sans);background:#fff;color:var(--texte)}
@@ -75,6 +80,9 @@ textarea{min-height:92px;resize:vertical}
 .aide{font-size:12px;color:var(--pale);margin-top:3px}
 .err{color:var(--stop);font-size:12.5px;margin-top:3px}
 .barre-actions{display:flex;gap:10px;align-items:center;margin-top:18px;padding-top:16px;border-top:1px solid var(--trait)}
+.actions{display:flex;gap:8px}
+.groupe-ajout{margin-top:16px}
+.lien-suite{margin-top:16px}
 
 /* ---- boutons ---- */
 .b{display:inline-block;padding:8px 15px;border-radius:5px;border:1px solid var(--trait-fort);

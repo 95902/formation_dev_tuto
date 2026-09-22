@@ -53,7 +53,7 @@
           @error('telephone') <div class="err">{{ $message }}</div> @enderror
         </div>
 
-        <div class="champ" style="grid-column:1/-1">
+        <div class="champ champ-pleine">
           <label for="adresse">Adresse</label>
           <input type="text" id="adresse" name="adresse" value="{{ old('adresse', $assure->adresse) }}">
           @error('adresse') <div class="err">{{ $message }}</div> @enderror

@@ -13,7 +13,7 @@
 
     <div class="carte">
       <div class="grille">
-        <div class="champ" style="grid-column:1/-1">
+        <div class="champ champ-pleine">
           <label for="assure_id">Assuré</label>
           <select id="assure_id" name="assure_id">
             <option value="">—</option>

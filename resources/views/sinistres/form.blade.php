@@ -13,7 +13,7 @@
 
     <div class="carte">
       <div class="grille">
-        <div class="champ" style="grid-column:1/-1">
+        <div class="champ champ-pleine">
           <label for="contrat_id">Contrat</label>
           <select id="contrat_id" name="contrat_id">
             <option value="">—</option>
@@ -73,7 +73,7 @@
           @error('gestionnaire') <div class="err">{{ $message }}</div> @enderror
         </div>
 
-        <div class="champ" style="grid-column:1/-1">
+        <div class="champ champ-pleine">
           <label for="description">Description</label>
           <textarea id="description" name="description">{{ old('description', $sinistre->description) }}</textarea>
           <div class="aide">Dix caractères minimum. C'est ce texte que la recherche interroge.</div>

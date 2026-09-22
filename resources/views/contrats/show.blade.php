@@ -52,7 +52,7 @@
 
     @include('partials.erreurs')
 
-    <form method="post" action="{{ route('garanties.store', $contrat) }}" style="margin-top:16px">
+    <form method="post" action="{{ route('garanties.store', $contrat) }}" class="groupe-ajout">
       @csrf
       <div class="grille">
         <div class="champ">
@@ -94,7 +94,7 @@
         @endforelse
       </tbody>
     </table>
-    <p style="margin-top:14px">
+    <p class="lien-suite">
       <a class="b" href="{{ route('sinistres.create', ['contrat_id' => $contrat->id]) }}">Déclarer un sinistre</a>
     </p>
   </div>

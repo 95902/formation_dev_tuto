@@ -40,7 +40,7 @@
         @endforelse
       </tbody>
     </table>
-    <p style="margin-top:14px">
+    <p class="lien-suite">
       <a class="b" href="{{ route('contrats.create', ['assure_id' => $assure->id]) }}">Souscrire un contrat</a>
     </p>
   </div>
