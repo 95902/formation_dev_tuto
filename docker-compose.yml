@@ -19,6 +19,16 @@ services:
       interval: 5s
       timeout: 3s
       retries: 10
+  qdrant:
+    image: qdrant/qdrant:latest
+    container_name: compas-qdrant
+    ports:
+      - "6333:6333"   # API REST + dashboard
+      - "6334:6334"   # API gRPC
+    volumes:
+      - qdrant-data:/qdrant/storage   # les vecteurs survivent au redémarrage
+    restart: unless-stopped
 
 volumes:
   db-data:
+  qdrant-data:
